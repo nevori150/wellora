@@ -42,7 +42,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="he" dir="rtl">
-<body className="min-h-full flex flex-col">{children}</body>
+<body className="min-h-full flex flex-col">
+        <span style={{position:"absolute",left:"-9999px",fontSize:"1px"}}>Impact-Site-Verification: d07c5a7a-25dc-4d0c-a9ef-66ebdb978ed3</span>
+        {children}
+      </body>
     </html>
   );
 }
