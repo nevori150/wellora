@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+
+  profile   UserProfile?
+  favorites Favorite[]
+}
+
+model UserProfile {
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sportStyle         String   @default("[]")
+  foodPrefs          String   @default("[]")
+  wellnessCategories String   @default("[]")
+  clothingSize       String?
+  avoidPlastic       Boolean  @default(true)
+  wellnessScore      Int?
+  updatedAt          DateTime @updatedAt
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+}
+
+model Product {
+  id             String       @id @default(cuid())
+  slug           String       @unique
+  name           String
+  category       String
+  description    String
+  image          String
+  tags           String       @default("[]")
+  rating         Float        @default(0)
+  reviews        Int          @default(0)
+  comparisonType String       @default("identical")
+  size           String?
+  source         String       @default("manual")
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  prices         StorePrice[]
+}
+
+model StorePrice {
+  id           String   @id @default(cuid())
+  productId    String
+  product      Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  store        String
+  price        Float
+  originalPrice Float?
+  url          String
+  affiliateUrl String?
+  productTitle String?
+  brand        String?
+  sizeValue    Float?
+  sizeUnit     String?
+  inStock      Boolean  @default(true)
+  lastChecked  DateTime @default(now())
+
+  @@unique([productId, store])
+}
