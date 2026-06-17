@@ -17,7 +17,7 @@ import * as readline from "readline";
 
 const prisma = new PrismaClient();
 
-// iHerb category → WELLZY category mapping
+// iHerb category → Wellora category mapping
 const CATEGORY_MAP: Record<string, string> = {
   "vitamins": "ויטמינים ותוספים",
   "vitamin": "ויטמינים ותוספים",

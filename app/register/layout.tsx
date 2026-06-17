@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "הרשמה בחינם",
-  description: "הצטרף ל-WELLZY בחינם — שמור מועדפים, בנה פרופיל wellness אישי וקבל המלצות מוצרים מותאמות.",
+  description: "הצטרף ל-Wellora בחינם — שמור מועדפים, בנה פרופיל wellness אישי וקבל המלצות מוצרים מותאמות.",
   robots: { index: false, follow: false },
-  alternates: { canonical: "https://wellzy.co.il/register" },
+  alternates: { canonical: "https://wellora.com/register" },
 };
 
 export default function RegisterLayout({ children }: { children: React.ReactNode }) {

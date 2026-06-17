@@ -2,7 +2,7 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
 const SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET ?? "wellzy-fallback-secret"
+  process.env.JWT_SECRET ?? "wellora-fallback-secret"
 );
 
 export async function signToken(payload: { userId: string; email: string; name: string }) {
@@ -23,7 +23,7 @@ export async function verifyToken(token: string) {
 
 export async function getSession() {
   const cookieStore = await cookies();
-  const token = cookieStore.get("wellzy_token")?.value;
+  const token = cookieStore.get("wellora_token")?.value;
   if (!token) return null;
   return verifyToken(token);
 }

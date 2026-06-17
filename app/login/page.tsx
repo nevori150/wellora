@@ -76,7 +76,7 @@ export default function LoginPage() {
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
             }}>
-              ברוך השב ל-WELLZY
+              ברוך השב ל-Wellora
             </h1>
             <p style={{ color: "var(--text-muted)", fontSize: 15 }}>
               התחבר כדי לגשת למועדפים ולפרופיל שלך

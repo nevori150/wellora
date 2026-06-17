@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://wellzy.co.il"),
+  metadataBase: new URL("https://wellora.com"),
   title: {
-    default: "WELLZY — Live the Wellness Life | השוואת מחירי וולנס",
-    template: "%s | WELLZY",
+    default: "Wellora — Your Wellness Universe | השוואת מחירי וולנס",
+    template: "%s | Wellora",
   },
   description: "מנוע החיפוש של עולם הוולנס — בגדי בד איכותי, ויטמינים, מזון אורגני, ציוד כושר וטיפוח טבעי. השוואת מחירים מ-20+ אתרים, הכל במקום אחד.",
   keywords: ["wellness", "וולנס", "השוואת מחירים", "ויטמינים", "מזון אורגני", "ספורט וכושר", "טיפוח טבעי", "iHerb", "Shein", "yes style", "iHerb ישראל"],
-  authors: [{ name: "WELLZY" }],
-  creator: "WELLZY",
+  authors: [{ name: "Wellora" }],
+  creator: "Wellora",
   robots: {
     index: true,
     follow: true,
@@ -19,14 +19,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "he_IL",
-    siteName: "WELLZY",
-    title: "WELLZY — Live the Wellness Life",
+    siteName: "Wellora",
+    title: "Wellora — Your Wellness Universe",
     description: "מנוע החיפוש של עולם הוולנס — השוואת מחירים מ-20+ אתרים.",
-    images: [{ url: "/og-default.png", width: 1200, height: 630, alt: "WELLZY" }],
+    images: [{ url: "/og-default.png", width: 1200, height: 630, alt: "Wellora" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "WELLZY — Live the Wellness Life",
+    title: "Wellora — Your Wellness Universe",
     description: "מנוע החיפוש של עולם הוולנס — השוואת מחירים מ-20+ אתרים.",
     images: ["/og-default.png"],
   },

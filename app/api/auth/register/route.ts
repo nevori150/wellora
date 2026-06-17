@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     const token = await signToken({ userId: user.id, email: user.email, name: user.name });
 
     const res = NextResponse.json({ success: true, name: user.name });
-    res.cookies.set("wellzy_token", token, {
+    res.cookies.set("wellora_token", token, {
       httpOnly: true,
       maxAge: 60 * 60 * 24 * 7,
       path: "/",

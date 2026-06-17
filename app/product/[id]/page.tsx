@@ -21,10 +21,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const bestPrice = Math.min(...product.prices.map(p => p.price));
   const bestStore = product.prices.find(p => p.price === bestPrice)!;
   return {
-    title: `${product.name} — ₪${bestPrice} ב-${bestStore.store} | WELLZY`,
+    title: `${product.name} — ₪${bestPrice} ב-${bestStore.store} | Wellora`,
     description: `השווה מחירים ל${product.name} ב-${product.prices.length} חנויות. מחיר הכי טוב: ₪${bestPrice} ב-${bestStore.store}. ${product.description}`,
     openGraph: {
-      title: `${product.name} — ₪${bestPrice} | WELLZY`,
+      title: `${product.name} — ₪${bestPrice} | Wellora`,
       description: product.description,
       images: [{ url: product.image }],
     },

@@ -13,8 +13,8 @@ interface ProfileData {
   foodPrefs?: string[];
 }
 
-const SEEN_KEY    = "wellzy_seen_products";
-const CURRENT_KEY = "wellzy_current_products";
+const SEEN_KEY    = "wellora_seen_products";
+const CURRENT_KEY = "wellora_current_products";
 
 function getSeenIds(): string[]    { try { return JSON.parse(localStorage.getItem(SEEN_KEY)    ?? "[]"); } catch { return []; } }
 function getCurrentIds(): string[] { try { return JSON.parse(localStorage.getItem(CURRENT_KEY) ?? "[]"); } catch { return []; } }
@@ -156,7 +156,7 @@ export default function PersonalizedSection() {
             marginBottom: 12,
             lineHeight: 1.3,
           }}>
-            WELLZY תמצא לך בדיוק מה שאתה מחפש
+            Wellora תמצא לך בדיוק מה שאתה מחפש
           </h2>
 
           <p style={{
@@ -167,7 +167,7 @@ export default function PersonalizedSection() {
             maxWidth: 520,
             margin: "0 auto 36px",
           }}>
-            אמור לנו על אורח החיים שלך — ו-WELLZY תסנן מעשרות אתרים
+            אמור לנו על אורח החיים שלך — ו-Wellora תסנן מעשרות אתרים
             ותציג לך רק את המוצרים שרלוונטיים אליך, במחיר הכי טוב.
           </p>
 
@@ -230,7 +230,7 @@ export default function PersonalizedSection() {
             fontFamily: "Heebo, sans-serif",
             marginBottom: 10,
           }}>
-            היי {userName} — בוא נתאים את WELLZY עבורך
+            היי {userName} — בוא נתאים את Wellora עבורך
           </h2>
           <p style={{ fontSize: 14, color: "var(--text-muted)", fontFamily: "Heebo, sans-serif", marginBottom: 24 }}>
             עוד לא בחרת תחומי וולנס. תן לנו לדעת מה מעניין אותך.

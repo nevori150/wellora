@@ -6,14 +6,14 @@ import { categories, products } from "@/data/products";
 import { wellnessSites } from "@/data/sources";
 
 export const metadata: Metadata = {
-  title: "WELLZY — Live the Wellness Life | השוואת מחירי וולנס",
+  title: "Wellora — Your Wellness Universe | השוואת מחירי וולנס",
   description: "השווה מחירים על ויטמינים, מזון אורגני, בגדי ספורט וטיפוח טבעי מ-iHerb, Shein, YesStyle ועוד 20 אתרים. חסוך אחוזים בכל קנייה.",
   openGraph: {
-    title: "WELLZY — Live the Wellness Life",
+    title: "Wellora — Your Wellness Universe",
     description: "מנוע החיפוש של עולם הוולנס. השוואת מחירים חכמה מ-20+ אתרים.",
-    url: "https://wellzy.co.il",
+    url: "https://wellora.com",
   },
-  alternates: { canonical: "https://wellzy.co.il" },
+  alternates: { canonical: "https://wellora.com" },
 };
 import { getCategoryIcon } from "@/lib/categoryIcons";
 import {
@@ -33,7 +33,7 @@ const steps = [
     step: "02",
     icon: <Search size={26} />,
     title: 'חיפוש אחד — כל האתרים',
-    desc: 'WELLZY סורקת 20+ אתרים מישראל ומחו"ל — Shein, iHerb, Decathlon, Lush ועוד',
+    desc: 'Wellora סורקת 20+ אתרים מישראל ומחו"ל — Shein, iHerb, Decathlon, Lush ועוד',
     color: "#F4EAD6",
   },
   {
@@ -122,7 +122,7 @@ export default function Home() {
                 backdropFilter: "blur(8px)",
               }}>
                 <Leaf size={14} />
-                WELLZY — Live the Wellness Life
+                Wellora — Your Wellness Universe
               </div>
             </div>
 
@@ -136,7 +136,7 @@ export default function Home() {
                 background: "linear-gradient(135deg, #3D6B54 0%, #B8955A 100%)",
                 WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
               }}>
-                Live the Wellness Life
+                Your Wellness Universe
               </span>
             </h1>
 
@@ -145,7 +145,7 @@ export default function Home() {
               marginBottom: 48, lineHeight: 1.8,
               maxWidth: 500, margin: "0 auto 48px",
             }}>
-              WELLZY מחפשת בעשרות אתרים ומוצאת לך את המוצרים הטובים ביותר לאורח החיים שלך —
+              Wellora מחפשת בעשרות אתרים ומוצאת לך את המוצרים הטובים ביותר לאורח החיים שלך —
               ויטמינים, בגדים, ספורט וטיפוח.
             </p>
 
@@ -559,7 +559,7 @@ export default function Home() {
               fontSize: 16, color: "var(--sage)", fontWeight: 700,
               marginBottom: 20, fontFamily: "Heebo, sans-serif",
             }}>
-              Live the Wellness Life
+              Your Wellness Universe
             </p>
             <p style={{ fontSize: 16, color: "var(--text-secondary)", marginBottom: 44, lineHeight: 1.8 }}>
               בנה את הפרופיל שלך בדקה אחת,<br />
@@ -598,11 +598,11 @@ export default function Home() {
                 background: "linear-gradient(135deg, #3D6B54 0%, #B8955A 100%)",
                 WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
               }}>
-                WELLZY
+                Wellora
               </div>
               <div style={{ fontSize: 13, color: "#8A8070", lineHeight: 1.7, maxWidth: 230 }}>
                 השוואת מחירים חכמה לאורח חיים בריא.<br />
-                Live the Wellness Life.
+                Your Wellness Universe.
               </div>
             </div>
 
@@ -637,10 +637,10 @@ export default function Home() {
 
           <div style={{ borderTop: "1px solid #2A2520", paddingTop: 22, display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
             <div style={{ fontSize: 12, color: "#4A4440" }}>
-              © 2026 WELLZY · כל הזכויות שמורות
+              © 2026 Wellora · כל הזכויות שמורות
             </div>
             <div style={{ fontSize: 12, color: "#4A4440" }}>
-              Live the Wellness Life
+              Your Wellness Universe
             </div>
           </div>
         </div>

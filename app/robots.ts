@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/favorites", "/profile"],
       },
     ],
-    sitemap: "https://wellzy.co.il/sitemap.xml",
+    sitemap: "https://wellora.com/sitemap.xml",
   };
 }

@@ -18,12 +18,12 @@ function SearchContent() {
   const [expandedProduct, setExpandedProduct] = useState<string | null>(null);
   const [showStoreFilter, setShowStoreFilter] = useState(false);
   const [preferredStores, setPreferredStores] = useState<string[]>(() => {
-    try { return JSON.parse(localStorage.getItem("wellzy_preferred_stores") ?? "[]"); }
+    try { return JSON.parse(localStorage.getItem("wellora_preferred_stores") ?? "[]"); }
     catch { return []; }
   });
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>(() => {
-    try { return JSON.parse(localStorage.getItem("wellzy_recent_searches") ?? "[]"); }
+    try { return JSON.parse(localStorage.getItem("wellora_recent_searches") ?? "[]"); }
     catch { return []; }
   });
 
@@ -32,7 +32,7 @@ function SearchContent() {
     if (trimmed.length < 2) return;
     setRecentSearches(prev => {
       const next = [trimmed, ...prev.filter(s => s !== trimmed)].slice(0, 4);
-      try { localStorage.setItem("wellzy_recent_searches", JSON.stringify(next)); } catch {}
+      try { localStorage.setItem("wellora_recent_searches", JSON.stringify(next)); } catch {}
       return next;
     });
   };
@@ -65,12 +65,12 @@ function SearchContent() {
       ? preferredStores.filter(s => s !== store)
       : [...preferredStores, store];
     setPreferredStores(next);
-    try { localStorage.setItem("wellzy_preferred_stores", JSON.stringify(next)); } catch {}
+    try { localStorage.setItem("wellora_preferred_stores", JSON.stringify(next)); } catch {}
   };
 
   const clearStores = () => {
     setPreferredStores([]);
-    try { localStorage.removeItem("wellzy_preferred_stores"); } catch {}
+    try { localStorage.removeItem("wellora_preferred_stores"); } catch {}
   };
 
   const filtered = useMemo(() => {
@@ -167,7 +167,7 @@ function SearchContent() {
                     <button
                       onMouseDown={() => {
                         setRecentSearches([]);
-                        try { localStorage.removeItem("wellzy_recent_searches"); } catch {}
+                        try { localStorage.removeItem("wellora_recent_searches"); } catch {}
                       }}
                       style={{ background: "none", border: "none", fontSize: 11, color: "var(--sage)", cursor: "pointer", fontFamily: "Heebo, sans-serif", fontWeight: 600 }}
                     >

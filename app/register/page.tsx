@@ -76,7 +76,7 @@ export default function RegisterPage() {
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
             }}>
-              הצטרף ל-WELLZY
+              הצטרף ל-Wellora
             </h1>
             <p style={{ color: "var(--text-muted)", fontSize: 15 }}>
               צור חשבון וקבל המלצות מותאמות אישית

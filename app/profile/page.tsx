@@ -237,7 +237,7 @@ export default function ProfilePage() {
                 background: "linear-gradient(135deg, #3D6B54 0%, #B8955A 100%)",
                 WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
               }}>
-                ברוך הבא ל-WELLZY
+                ברוך הבא ל-Wellora
               </h1>
               <p style={{ fontSize: 16, color: "var(--text-secondary)", lineHeight: 1.75, marginBottom: 32, maxWidth: 400, margin: "0 auto 32px" }}>
                 נכיר אותך קצת — כדי שנוכל למצוא לך בדיוק את המוצרים שמתאימים לאורח החיים שלך
@@ -274,7 +274,7 @@ export default function ProfilePage() {
                 </h2>
               </div>
               <p style={{ color: "var(--text-muted)", marginBottom: 28, fontSize: 15 }}>
-                בחר תחום אחד או יותר — WELLZY יתאים לך מוצרים ממש מדויקים
+                בחר תחום אחד או יותר — Wellora יתאים לך מוצרים ממש מדויקים
               </p>
 
               <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 36 }}>
@@ -323,7 +323,7 @@ export default function ProfilePage() {
                   marginBottom: 20,
                   fontFamily: "Heebo, sans-serif",
                 }}>
-                  ✓ בחרת {profile.wellnessCategories.length} תחומים — WELLZY ידע לחפש בשבילך בדיוק
+                  ✓ בחרת {profile.wellnessCategories.length} תחומים — Wellora ידע לחפש בשבילך בדיוק
                 </div>
               )}
 

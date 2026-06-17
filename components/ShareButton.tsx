@@ -19,7 +19,7 @@ export default function ShareButton({ title, price, store }: ShareButtonProps) {
       try {
         await navigator.share({
           title: `${title} — ₪${price}`,
-          text: `מצאתי את ${title} ב-₪${price} ב-${store} דרך WELLZY!`,
+          text: `מצאתי את ${title} ב-₪${price} ב-${store} דרך Wellora!`,
           url: pageUrl,
         });
       } catch {

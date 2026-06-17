@@ -78,7 +78,7 @@ export default function Header() {
               letterSpacing: "-0.5px",
               lineHeight: 1,
             }}>
-              WELLZY
+              Wellora
             </span>
             <span style={{
               fontSize: 9,
@@ -88,7 +88,7 @@ export default function Header() {
               lineHeight: 1,
               fontFamily: "Heebo, sans-serif",
             }}>
-              Live the Wellness Life
+              Your Wellness Universe
             </span>
           </div>
         </Link>
