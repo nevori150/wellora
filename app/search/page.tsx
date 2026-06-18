@@ -7,7 +7,7 @@ import FavoriteButton from "@/components/FavoriteButton";
 import { products, categories } from "@/data/products";
 import Link from "next/link";
 import { calcPricePerUnit, calcPricePerUnitNumeric } from "@/lib/priceUtils";
-import { Search, Globe, Target, DollarSign, Zap, Clock, CheckCircle2, Scale, AlertTriangle, BarChart3, Star } from "lucide-react";
+import { Search, Globe, Target, DollarSign, Zap, Clock, CheckCircle2, Scale, AlertTriangle, BarChart3, Star, SlidersHorizontal, X } from "lucide-react";
 import { getCategoryIcon } from "@/lib/categoryIcons";
 
 function SearchContent() {
@@ -26,6 +26,10 @@ function SearchContent() {
     try { return JSON.parse(localStorage.getItem("wellora_recent_searches") ?? "[]"); }
     catch { return []; }
   });
+  const [priceMax, setPriceMax] = useState<number | "">("");
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
 
   const saveSearch = (q: string) => {
     const trimmed = q.trim();
@@ -60,6 +64,38 @@ function SearchContent() {
     return result.sort((a, b) => a.store.localeCompare(b.store, "he"));
   }, []);
 
+  const allBrands = useMemo(() => {
+    const seen = new Set<string>();
+    for (const p of products) {
+      for (const pr of p.prices) {
+        if (pr.brand && pr.brand !== "Generic") seen.add(pr.brand);
+      }
+    }
+    return Array.from(seen).sort((a, b) => a.localeCompare(b, "he"));
+  }, []);
+
+  const LIFESTYLE_VALUES: { label: string; emoji: string; match: string }[] = [
+    { label: "טבעי",        emoji: "🌿", match: "טבעי" },
+    { label: "אורגני",      emoji: "🌱", match: "אורגני" },
+    { label: "טבעוני",      emoji: "🐰", match: "טבעוני" },
+    { label: "ללא גלוטן",   emoji: "🌾", match: "ללא גלוטן" },
+    { label: "GOTS",         emoji: "✅", match: "GOTS" },
+    { label: "ישראלי",      emoji: "🇮🇱", match: "ישראל" },
+    { label: "ללא כימיקלים", emoji: "🚫", match: "כימיקל" },
+    { label: "חלבון גבוה",   emoji: "💪", match: "חלבון" },
+  ];
+
+  const activeFilterCount =
+    (priceMax !== "" ? 1 : 0) +
+    selectedBrands.length +
+    selectedTags.length;
+
+  const clearAllFilters = () => {
+    setPriceMax("");
+    setSelectedBrands([]);
+    setSelectedTags([]);
+  };
+
   const toggleStore = (store: string) => {
     const next = preferredStores.includes(store)
       ? preferredStores.filter(s => s !== store)
@@ -84,6 +120,25 @@ function SearchContent() {
           p.description.toLowerCase().includes(q) ||
           p.tags.some((t) => t.toLowerCase().includes(q)) ||
           p.category.toLowerCase().includes(q)
+      );
+    }
+    if (priceMax !== "") {
+      result = result.filter(p =>
+        Math.min(...p.prices.map(pr => pr.price)) <= (priceMax as number)
+      );
+    }
+    if (selectedBrands.length > 0) {
+      result = result.filter(p =>
+        p.prices.some(pr =>
+          selectedBrands.includes(pr.brand ?? "") || selectedBrands.includes(pr.store)
+        )
+      );
+    }
+    if (selectedTags.length > 0) {
+      result = result.filter(p =>
+        selectedTags.some(tag =>
+          p.tags.some(t => t.toLowerCase().includes(tag.toLowerCase()))
+        )
       );
     }
     return result.sort((a, b) => {
@@ -288,6 +343,176 @@ function SearchContent() {
                 </button>
               );
             })}
+          </div>
+
+          {/* ─── פילטרים מתקדמים ─── */}
+          <div style={{
+            background: "white",
+            borderRadius: 16,
+            border: "1px solid var(--border-light)",
+            marginBottom: 12,
+            overflow: "hidden",
+          }}>
+            <button
+              onClick={() => setShowAdvancedFilters(v => !v)}
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "14px 20px",
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                fontFamily: "Heebo, sans-serif",
+              }}
+            >
+              <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text)", display: "flex", alignItems: "center", gap: 6 }}>
+                  <SlidersHorizontal size={14} color="var(--sage)" /> פילטרים
+                </span>
+                {activeFilterCount > 0 && (
+                  <span style={{ background: "var(--sage)", color: "white", borderRadius: 50, padding: "2px 10px", fontSize: 12, fontWeight: 700 }}>
+                    {activeFilterCount} פעילים
+                  </span>
+                )}
+                {activeFilterCount === 0 && (
+                  <span style={{ fontSize: 12, color: "var(--text-muted)" }}>תקציב · ערכי חיים · מותגים</span>
+                )}
+              </span>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                {activeFilterCount > 0 && (
+                  <button
+                    onClick={(e) => { e.stopPropagation(); clearAllFilters(); }}
+                    style={{ background: "none", border: "none", fontSize: 12, color: "var(--text-muted)", cursor: "pointer", display: "flex", alignItems: "center", gap: 4, fontFamily: "Heebo, sans-serif" }}
+                  >
+                    <X size={12} /> נקה הכל
+                  </button>
+                )}
+                <span style={{ fontSize: 13, color: "var(--sage)", fontWeight: 600 }}>
+                  {showAdvancedFilters ? "סגור ↑" : "פתח ↓"}
+                </span>
+              </div>
+            </button>
+
+            {showAdvancedFilters && (
+              <div style={{ borderTop: "1px solid var(--border-light)", padding: "20px" }}>
+
+                {/* תקציב */}
+                <div style={{ marginBottom: 20 }}>
+                  <p style={{ fontSize: 13, fontWeight: 700, color: "var(--text)", marginBottom: 10, fontFamily: "Heebo, sans-serif" }}>
+                    💰 תקציב מקסימלי
+                  </p>
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    {([
+                      { label: "הכל", val: "" },
+                      { label: "עד ₪50",  val: 50 },
+                      { label: "עד ₪100", val: 100 },
+                      { label: "עד ₪200", val: 200 },
+                      { label: "עד ₪500", val: 500 },
+                    ] as { label: string; val: number | "" }[]).map(opt => {
+                      const active = priceMax === opt.val;
+                      return (
+                        <button
+                          key={opt.label}
+                          onClick={() => setPriceMax(opt.val)}
+                          style={{
+                            border: `1.5px solid ${active ? "var(--sage)" : "var(--border)"}`,
+                            background: active ? "var(--sage-light)" : "white",
+                            color: active ? "var(--sage)" : "var(--text-secondary)",
+                            borderRadius: 50,
+                            padding: "6px 16px",
+                            cursor: "pointer",
+                            fontFamily: "Heebo, sans-serif",
+                            fontWeight: active ? 700 : 400,
+                            fontSize: 13,
+                            transition: "all 0.15s",
+                          }}
+                        >
+                          {opt.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* ערכי חיים */}
+                <div style={{ marginBottom: 20 }}>
+                  <p style={{ fontSize: 13, fontWeight: 700, color: "var(--text)", marginBottom: 10, fontFamily: "Heebo, sans-serif" }}>
+                    🌿 ערכי חיים
+                  </p>
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    {LIFESTYLE_VALUES.map(lv => {
+                      const active = selectedTags.includes(lv.match);
+                      return (
+                        <button
+                          key={lv.match}
+                          onClick={() => setSelectedTags(prev =>
+                            prev.includes(lv.match) ? prev.filter(t => t !== lv.match) : [...prev, lv.match]
+                          )}
+                          style={{
+                            border: `1.5px solid ${active ? "var(--sage)" : "var(--border)"}`,
+                            background: active ? "var(--sage-light)" : "white",
+                            color: active ? "var(--sage)" : "var(--text-secondary)",
+                            borderRadius: 50,
+                            padding: "6px 14px",
+                            cursor: "pointer",
+                            fontFamily: "Heebo, sans-serif",
+                            fontWeight: active ? 700 : 400,
+                            fontSize: 13,
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 5,
+                            transition: "all 0.15s",
+                          }}
+                        >
+                          <span>{lv.emoji}</span>
+                          <span>{lv.label}</span>
+                          {active && <span style={{ fontSize: 11 }}>✓</span>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* מותגים */}
+                {allBrands.length > 0 && (
+                  <div>
+                    <p style={{ fontSize: 13, fontWeight: 700, color: "var(--text)", marginBottom: 10, fontFamily: "Heebo, sans-serif" }}>
+                      🏷️ מותגים
+                    </p>
+                    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                      {allBrands.map(brand => {
+                        const active = selectedBrands.includes(brand);
+                        return (
+                          <button
+                            key={brand}
+                            onClick={() => setSelectedBrands(prev =>
+                              prev.includes(brand) ? prev.filter(b => b !== brand) : [...prev, brand]
+                            )}
+                            style={{
+                              border: `1.5px solid ${active ? "#7B6FAB" : "var(--border)"}`,
+                              background: active ? "#F0EEF9" : "white",
+                              color: active ? "#7B6FAB" : "var(--text-secondary)",
+                              borderRadius: 50,
+                              padding: "6px 14px",
+                              cursor: "pointer",
+                              fontFamily: "Heebo, sans-serif",
+                              fontWeight: active ? 700 : 400,
+                              fontSize: 13,
+                              transition: "all 0.15s",
+                            }}
+                          >
+                            {brand}
+                            {active && <span style={{ marginRight: 4, fontSize: 11 }}>✓</span>}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* ─── פילטר אתרים ─── */}
