@@ -75,6 +75,7 @@ function SearchContent() {
   }, []);
 
   const LIFESTYLE_VALUES: { label: string; emoji: string; match: string }[] = [
+    { label: "כשר",          emoji: "✡️",  match: "כשר" },
     { label: "טבעי",        emoji: "🌿", match: "טבעי" },
     { label: "אורגני",      emoji: "🌱", match: "אורגני" },
     { label: "טבעוני",      emoji: "🐰", match: "טבעוני" },
